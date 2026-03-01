@@ -1,0 +1,258 @@
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{graphicx}
+
+\title{ISL Chapter 3 Test --- Graded}
+\author{Andrew Leacock}
+\date{March 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Chapter 3 Mastery Test --- Linear Regression (Graded)}
+
+\subsection*{Section I: Model Structure}
+
+\begin{enumerate}
+    \item State the classical linear regression assumptions precisely.
+
+It assumes there is a relationship between the inputs and output.
+
+{\color{red}
+Correct answer:
+\begin{itemize}
+\item Linearity: $Y = X\beta + \varepsilon$
+\item $\mathbb{E}[\varepsilon] = 0$
+\item Constant variance (homoscedasticity)
+\item Independence of errors
+\item No perfect multicollinearity
+\end{itemize}
+}
+
+    \item What is the difference between:
+        \begin{itemize}
+            \item The data generating model
+            \item The fitted model
+        \end{itemize}
+
+The difference between the data generating model and the fitted model is the fitted model does not guarantee that the output will be the same as the output of the data generating model. The flexibility of the model will always influence how well the fitted model fits the data.
+
+{\color{red}
+More precise:
+The data generating model is the true population model including the error term.
+The fitted model is the estimated model using $\hat{\beta}$ from the sample.
+}
+
+    \item In multiple regression, what does the coefficient $\beta_j$ represent?
+
+$\beta_j$ is the number of coefficients
+
+{\color{red}
+Correct answer:
+$\beta_j$ represents the change in $Y$ associated with a one-unit increase in $X_j$, holding all other predictors fixed.
+}
+\end{enumerate}
+
+\subsection*{Section II: Least Squares Mechanics}
+
+\begin{enumerate}
+    \setcounter{enumi}{3}
+
+    \item Write the OLS objective function in matrix form.
+
+{\color{red}\textit{Missing.} 
+Correct answer: $\min_\beta (y - X\beta)^T (y - X\beta)$}
+
+    \item Derive the normal equations.
+
+{\color{red}\textit{Missing.} 
+Correct answer: $X^T X \hat{\beta} = X^T y$}
+
+    \item Why is $(X^T X)^{-1}$ required? What must be true for it to exist?
+
+It is used to compute standard error
+
+{\color{red}
+Incorrect.
+It is required to solve the normal equations for $\hat{\beta}$.
+It exists only if $X$ has full column rank (no perfect multicollinearity).
+}
+
+    \item What happens geometrically if $X$ does not have full column rank?
+
+{\color{red}\textit{Missing.}
+Correct answer:
+The column space collapses to lower dimension; projection is not unique.
+}
+\end{enumerate}
+
+\subsection*{Section III: Statistical Inference}
+
+\begin{enumerate}
+    \setcounter{enumi}{7}
+
+    \item Define Residual Standard Error (RSE).
+
+Residual Standard Error is how varied your residuals are across difference training sets
+
+{\color{red}
+Incorrect.
+RSE estimates $\sigma$:
+\[
+RSE = \sqrt{\frac{RSS}{n - p - 1}}
+\]
+It measures the typical size of residuals.
+}
+
+    \item Why do we divide by $n - p - 1$ instead of $n$?
+
+{\color{red}\textit{Missing.}
+Correct answer:
+Because we lose $p+1$ degrees of freedom estimating coefficients.
+}
+
+    \item Write the formula for the variance of $\hat{\beta}$.
+
+{\color{red}\textit{Missing.}
+Correct answer:
+\[
+Var(\hat{\beta}) = \sigma^2 (X^T X)^{-1}
+\]
+}
+
+    \item What causes standard errors to increase?
+
+Small data, high noise, multicollinerarity 
+
+{\color{red}
+Correct but incomplete.
+Also: near-singularity of $X^T X$.
+}
+
+    \item What is the null hypothesis tested in the t-test for a coefficient?
+
+There is no relationship between X and Y
+
+{\color{red}
+More precise:
+$H_0: \beta_j = 0$
+}
+
+    \item What does a large p-value actually mean?
+
+There is likely to be an association between the predictor and the response
+
+{\color{red}
+Incorrect.
+A large p-value means insufficient evidence to reject $H_0$.
+}
+\end{enumerate}
+
+\subsection*{Section IV: Model Fit}
+
+\begin{enumerate}
+    \setcounter{enumi}{13}
+
+    \item Define $R^2$.
+
+{\color{red}\textit{Missing.}
+$R^2 = 1 - \frac{RSS}{TSS}$}
+
+    \item Why does adjusted $R^2$ exist?
+
+{\color{red}\textit{Missing.}
+It penalizes adding unnecessary predictors.}
+
+    \item When is $R^2$ misleading?
+
+{\color{red}\textit{Missing.}
+When comparing models with different numbers of predictors or in overfitting.}
+\end{enumerate}
+
+\subsection*{Section V: Interpretation and Extensions}
+
+\begin{enumerate}
+    \setcounter{enumi}{16}
+
+    \item Explain multicollinearity clearly.
+
+It is coloumn or features that have a strong linear correlation. 
+
+{\color{red}
+Correct but needs precision:
+Predictors are highly linearly dependent, making $X^T X$ nearly singular.
+}
+
+    \item Why do we drop one dummy variable?
+
+It can casue high standard eror
+
+{\color{red}
+More precise:
+To avoid perfect multicollinearity (dummy variable trap).
+}
+
+    \item What does an interaction term allow the model to do?
+
+{\color{red}\textit{Missing.}
+Allows the effect of one predictor to depend on another.}
+
+    \item Why is a polynomial regression still linear?
+
+{\color{red}\textit{Missing.}
+Because it is linear in the parameters $\beta$, even if nonlinear in $x$.}
+\end{enumerate}
+
+\subsection*{Section VI: Failure Modes}
+
+\begin{enumerate}
+    \setcounter{enumi}{20}
+
+    \item What happens when $p > n$?
+
+{\color{red}\textit{Missing.}
+$X^T X$ is singular; infinite solutions; OLS undefined.}
+
+    \item Why is extrapolation dangerous in linear regression?
+
+{\color{red}\textit{Missing.}
+Model assumptions may not hold outside observed data range.}
+
+    \item When does linear regression have high bias?
+
+When the variance is low
+
+{\color{red}
+Incorrect.
+High bias occurs when the model is too simple (underfitting).
+}
+
+    \item When does it have high variance?
+
+when the bias is low
+
+{\color{red}
+Incorrect.
+High variance occurs when the model is overly flexible or data is small.
+}
+\end{enumerate}
+
+\section*{Overall Grade}
+
+Score: 35\%
+
+\section*{What You Must Review}
+
+\begin{itemize}
+\item Classical regression assumptions --- pp. 62--66
+\item Matrix form of OLS and normal equations --- pp. 68--73
+\item Variance formula for $\hat{\beta}$ --- pp. 71--74
+\item RSE and degrees of freedom --- pp. 66--69
+\item Interpretation of p-values --- pp. 73--78
+\item $R^2$ and adjusted $R^2$ --- pp. 75--80
+\item Bias vs variance definitions --- pp. 34--40 (Chapter 2)
+\item Geometric interpretation of OLS --- pp. 68--72
+\end{itemize}
+
+\end{document}
